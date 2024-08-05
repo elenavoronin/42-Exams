@@ -94,23 +94,28 @@ void    add_front(t_list **list, char *content)
 }
 
 
-int compare(t_list *open, char *word)
+int compare(t_list **open, char *word)
 {
     t_list *current;
     t_list *prev;
-    current = open;
-    while (open->next != NULL)
+    if (!open || !(*open))
+        return 1;
+    current = (*open);
+    prev = NULL;
+    while (current->next != NULL)
     {
-        open = open->next;
-    }
-    if (strcmp(open->content, word) == 0)
-    {
-        while (current->next->next != NULL)
-        {
-            current = current->next;
-        }
         prev = current;
-        prev->next = NULL;
+        current = current->next;
+    }
+    printf("open-> %s\n", current->content);
+    if (strcmp(current->content, word) == 0)
+    {
+        if (prev)
+            prev->next = NULL;
+        else
+            *open = NULL;
+        free(current->content);
+        free(current);
         return (0);
     }
     return (1);
@@ -148,7 +153,6 @@ int validate(char *str)
                     free_list(open);
                     return (1);
                 }
-                // printf("open-> %s\n", open->content);
             }
             else
             {
@@ -161,7 +165,8 @@ int validate(char *str)
                     i++;
                 }
                 closing[j] = '\0';
-                if (compare(open, closing) == 1)
+                printf("close-> %s\n", closing);
+                if (compare(&open, closing) == 1)
                 {
                     free_list(open);
                     return (1);
