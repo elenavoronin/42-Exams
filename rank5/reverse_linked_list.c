@@ -9,8 +9,6 @@ typedef struct s_list
 } 	t_list;
 
 
-
-
 t_list* new_node(char *content)
 {
 	t_list *new = malloc(sizeof(t_list));
