@@ -102,12 +102,12 @@ void substraction(char *s1, char *s2)
 		else
 			digit2 = 0;
 		nr = digit1 - digit2 - borrow;
-		if (nr < 0) {  // If nrerence is negative, handle borrowing
+		if (nr < 0) { 
             nr += 10;
-            borrow = 1;  // Set borrow to 1 for the next iteration
+            borrow = 1;
         } else 
             borrow = 0;
-        res[res_len--] = nr + '0';  // Store the current digit in the result
+        res[res_len--] = nr + '0';
     }
 	print_nr(res);
 	free(res);

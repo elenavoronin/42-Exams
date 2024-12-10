@@ -31,6 +31,7 @@ int nr_len(char *s)
 		i++;
 	return (i);
 }
+
 void print_nr(char *res)
 {
 	int i = 0;
